@@ -1,0 +1,9 @@
+---
+import Layout from "../layouts/Layout.astro";
+import { getLandingData } from "@/services/data.service";
+const data = await getLandingData();
+---
+
+<Layout title="Culinary Canvas" meta={data.meta}>
+  <div>Hello</div>
+</Layout>
