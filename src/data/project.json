@@ -49,5 +49,24 @@
         "reviewCount": "276"
       }
     }
-  }
+  },
+  "dishes": [
+      {
+        "imagePath": "dishImages/cocktails.jpg",
+        "alt": "Cocktails image",
+        "dishType": "Cocktails"
+
+      },
+      {
+        "imagePath": "dishImages/food.jpg",
+        "alt": "Food Image",
+        "dishType": "Food"
+      },
+      {
+        "imagePath": "dishImages/desserts.png",
+        "alt": "Desserts Image",
+        "dishType": "Desserts"
+      }
+    ]
+  
 }

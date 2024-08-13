@@ -1,9 +1,16 @@
 ---
+import HeroMain from "@/sections/HeroMain.astro";
 import Layout from "../layouts/Layout.astro";
 import { getLandingData } from "@/services/data.service";
+import PopularDish from "@/sections/PopularDish.astro";
+import TitleBar from "@/sections/TitleBar.astro";
+import Testimonial from "@/sections/Testimonial.astro";
 const data = await getLandingData();
 ---
 
 <Layout title="Culinary Canvas" meta={data.meta}>
-  <div>Hello</div>
+  <HeroMain />
+  <TitleBar />
+  <PopularDish data={data.dishes} />
+  <Testimonial />
 </Layout>

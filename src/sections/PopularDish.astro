@@ -1,0 +1,239 @@
+---
+import type { DishesName } from "@/config/data.interface";
+import { Image } from "astro:assets";
+import Dish1 from "../assets/dishImages/cocktails.jpg";
+import Dish2 from "../assets/dishImages/food.jpg";
+import Dish3 from "../assets/dishImages/desserts.png";
+interface Props {
+  data: DishesName;
+}
+
+const { data } = Astro.props;
+---
+
+<div class="main-container">
+  <div class="inner-container">
+    <a href="" class="left-section">
+      <Image src={Dish1} alt="" />
+      {/* @ts-ignore */}
+      <h1 class="heading">{data[0].dishType}</h1>
+    </a>
+    <div class="right-section">
+      <div class="top-section">
+        <a href="" class="image">
+          <Image src={Dish2} alt="" />
+          {/* @ts-ignore */}
+          <h1 class="heading">{data[1].dishType}</h1>
+        </a>
+        <div class="text">
+          <h1>Culinary Canvas</h1>
+          <p>
+            Lorem ipsum dolor sit amet consectetur adipisicing elit. Ratione,
+            corporis!
+          </p>
+          <a class="btn-filled" href="/menu">Menu</a>
+        </div>
+      </div>
+      <a href="" class="bottom-section">
+        <Image src={Dish3} alt="" />
+        {/* @ts-ignore */}
+        <h1 class="heading">{data[2].dishType}</h1>
+      </a>
+    </div>
+  </div>
+</div>
+
+<style>
+  .main-container {
+    /* background-color: var(--base-l-10); */
+    padding: 1rem 0;
+  }
+
+  .inner-container {
+    max-width: 1300px;
+    margin: 0 auto;
+    height: 100vh;
+    display: flex;
+    padding: 1rem;
+    gap: 2rem;
+  }
+  .left-section {
+    width: 30%;
+    height: 100%;
+    position: relative;
+    overflow: hidden;
+    background-color: #bdbdbd;
+    border-radius: 8px;
+
+    img {
+      height: 100%;
+      width: 100%;
+      object-fit: cover;
+      transition: transform 0.5s ease;
+      &:hover {
+        transform: scale(1.2);
+      }
+    }
+  }
+  .heading {
+    position: absolute;
+    bottom: 10%;
+    left: 50%;
+    transform: translateX(-50%);
+    border: 2px dashed var(--base-d);
+    padding: 0.5rem;
+    background-color: var(--base-l-50);
+    font-size: 1rem;
+    font-weight: 600;
+    color: var(--base-d);
+  }
+  .right-section {
+    width: 70%;
+    display: flex;
+    flex-direction: column;
+    gap: 2rem;
+  }
+  .top-section {
+    width: 100%;
+    height: 40%;
+    display: flex;
+    gap: 2rem;
+  }
+  .image {
+    width: 70%;
+    height: 100%;
+
+    position: relative;
+    position: relative;
+    overflow: hidden;
+    border-radius: 8px;
+    img {
+      height: 100%;
+      width: 100%;
+      object-fit: cover;
+      transition: transform 0.5s ease;
+      &:hover {
+        transform: scale(1.1);
+      }
+    }
+  }
+  .text {
+    width: 30%;
+    height: 100%;
+    display: flex;
+    gap: 0.5rem;
+    flex-direction: column;
+    h1 {
+      font-size: 2rem;
+      color: var(--base-d-50);
+    }
+    p {
+      line-height: 1.4rem;
+      font-weight: 300;
+      font-size: 0.9rem;
+      color: var(--base-d-40);
+    }
+  }
+  .btn-style-dark {
+    padding: 0.5rem 1rem;
+    background-color: var(--base-d-50);
+    border: 1px solid var(--base-d-50);
+    color: var(--base-l-50);
+    text-decoration: none;
+    width: fit-content;
+    font-weight: 600;
+    transition: background-color 0.3s ease;
+    &:hover {
+      background-color: var(--base-l-50);
+      color: var(--base-d-50);
+      border: 1px solid var(--base-d-50);
+    }
+  }
+
+  .btn-filled {
+    display: inline-block;
+    margin-top: 1rem;
+    width: 100%;
+    background-color: var(--base-l);
+    text-align: center;
+    padding: 0.7rem 1rem;
+    color: white;
+    text-decoration: none;
+    transition: background-color 0.5s ease-in-out;
+    &:hover {
+      background-color: var(--base-d);
+    }
+  }
+
+  .bottom-section {
+    width: 100%;
+    height: 60%;
+    background-color: #bdbdbd;
+    position: relative;
+    overflow: hidden;
+    border-radius: 8px;
+    img {
+      height: 100%;
+      width: 100%;
+      object-fit: cover;
+      transition: transform 0.5s ease;
+      &:hover {
+        transform: scale(1.2);
+      }
+    }
+  }
+  @media (max-width: 1000px) {
+    .top-section {
+      gap: 0.5rem;
+    }
+    .right-section {
+      gap: 0.5rem;
+    }
+    .inner-container {
+      gap: 0.5rem;
+    }
+    .left-section {
+      width: 40%;
+    }
+    .right-section {
+      width: 60%;
+    }
+  }
+  @media (max-width: 800px) {
+    .top-section {
+      gap: 1rem;
+    }
+    .right-section {
+      gap: 1rem;
+    }
+    .inner-container {
+      gap: 1rem;
+    }
+    .inner-container {
+      max-width: 100%;
+      margin: 0 auto;
+      height: fit-content;
+      display: flex;
+      flex-direction: column-reverse;
+    }
+    .right-section {
+      width: 100%;
+    }
+    .top-section {
+      flex-direction: column-reverse;
+      width: 100%;
+      height: fit-content;
+    }
+    .image {
+      width: 100%;
+      height: auto;
+      background-color: #bdbdbd;
+    }
+    .text {
+      width: 80%;
+    }
+    .left-section {
+      width: 100%;
+    }
+  }
+</style>

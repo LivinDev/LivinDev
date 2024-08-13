@@ -1,0 +1,56 @@
+---
+import { Image } from "astro:assets";
+interface Props {
+  imageSrc: any;
+  rating: number;
+  reviewText: string;
+  reviewerName: string;
+}
+
+const { imageSrc, rating, reviewText, reviewerName } = Astro.props;
+
+const renderStars = (count: number) => {
+  return "★".repeat(count) + "☆".repeat(5 - count);
+};
+---
+
+<div class="review-card">
+  <Image src={imageSrc} alt="Review image" class="review-image" />
+  <div class="rating">{renderStars(rating)}</div>
+  <p class="review-text">{reviewText}</p>
+  <p class="reviewer-name">{reviewerName}</p>
+</div>
+
+<style>
+  .review-card {
+    background-color: #f9f9f9;
+    border-radius: 8px;
+    padding: 20px;
+    max-width: 400px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  }
+
+  .review-image {
+    width: 100%;
+    height: auto;
+    border-radius: 8px;
+    margin-bottom: 10px;
+  }
+
+  .rating {
+    color: #ffc107;
+    font-size: 24px;
+    margin-bottom: 10px;
+  }
+
+  .review-text {
+    font-size: 16px;
+    line-height: 1.5;
+    margin-bottom: 10px;
+  }
+
+  .reviewer-name {
+    font-weight: bold;
+    text-align: right;
+  }
+</style>

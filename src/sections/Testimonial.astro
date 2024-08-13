@@ -1,0 +1,221 @@
+---
+import TestimonialCard from "@/components/TestimonialCard.astro";
+import Image1 from "../assets/res-selfie.jpg";
+import { Image } from "astro:assets";
+import CaretLeft from "../assets/svg/CaretLeft.svg";
+import CaretRight from "../assets/svg/CaretRight.svg";
+
+const testimonials = [
+  {
+    imageSrc: Image1,
+    rating: 5,
+    reviewText:
+      "From succulent shrimp to melt-in-your-mouth fish, every dish is a masterpiece. It's a seafood lover's paradise worth savoring.",
+    reviewerName: "Erika Huff",
+  },
+  {
+    imageSrc: Image1,
+    rating: 5,
+    reviewText:
+      "From succulent shrimp to melt-in-your-mouth fish, every dish is a masterpiece. It's a seafood lover's paradise worth savoring.",
+    reviewerName: "John Doe",
+  },
+  {
+    imageSrc: Image1,
+    rating: 5,
+    reviewText:
+      "From succulent shrimp to melt-in-your-mouth fish, every dish is a masterpiece. It's a seafood lover's paradise worth savoring.",
+    reviewerName: "Jane Smith",
+  },
+  {
+    imageSrc: Image1,
+    rating: 3,
+    reviewText:
+      "From succulent shrimp to melt-in-your-mouth fish, every dish is a masterpiece. It's a seafood lover's paradise worth savoring.",
+    reviewerName: "Bob Johnson",
+  },
+  {
+    imageSrc: Image1,
+    rating: 5,
+    reviewText:
+      "From succulent shrimp to melt-in-your-mouth fish, every dish is a masterpiece. It's a seafood lover's paradise worth savoring.",
+    reviewerName: "Alice Brown",
+  },
+];
+---
+
+<div class="outer-container">
+  <div class="inner-container">
+    <h1 class="title">WHAT OUR CUSTOMERS SAY ABOUT US.</h1>
+    <div class="carousel-container">
+      <Image src={CaretLeft} class="nav-button prev" alt="" id="prevBtn" />
+      <div class="testimonial-carousel" id="testimonialCarousel">
+        {
+          testimonials.map((testimonial, index) => (
+            <div class="carousel-item" data-index={index}>
+              <TestimonialCard
+                imageSrc={testimonial.imageSrc}
+                rating={testimonial.rating}
+                reviewText={testimonial.reviewText}
+                reviewerName={testimonial.reviewerName}
+              />
+            </div>
+          ))
+        }
+      </div>
+      <Image src={CaretRight} class="nav-button next" alt="" id="nextBtn" />
+    </div>
+  </div>
+</div>
+
+<style>
+  .outer-container {
+    background-color: var(--base-l-10);
+    height: fit-content;
+    padding: 2rem 0;
+  }
+  .title {
+    width: 100%;
+    max-width: 700px;
+    line-height: 1.2em;
+    font-size: 50px;
+    margin: 1rem 0;
+  }
+  .inner-container {
+    max-width: 1330px;
+    padding: 1rem;
+    margin: 0 auto;
+  }
+  .carousel-container {
+    position: relative;
+    overflow: hidden;
+  }
+  .testimonial-carousel {
+    display: flex;
+    transition: transform 0.3s ease-in-out;
+  }
+  .carousel-item {
+    flex: 0 0 100%;
+    max-width: 100%;
+    padding: 0 10px;
+    box-sizing: border-box;
+  }
+  .nav-button {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    background: rgba(0, 0, 0, 0.5);
+    height: 50px;
+    width: 50px;
+    border: none;
+    padding: 10px;
+    border-radius: 50%;
+    cursor: pointer;
+    z-index: 10;
+  }
+  .prev {
+    left: 10px;
+  }
+  .next {
+    right: 10px;
+  }
+
+  @media (min-width: 768px) {
+    .carousel-item {
+      flex: 0 0 50%;
+      max-width: 50%;
+    }
+  }
+
+  @media (min-width: 1024px) {
+    .carousel-item {
+      flex: 0 0 33.333%;
+      max-width: 33.333%;
+    }
+  }
+
+  @media (max-width: 767px) {
+    .title {
+      font-size: 30px;
+    }
+  }
+</style>
+
+<script is:inline>
+  const carousel = document.getElementById("testimonialCarousel");
+  const items = carousel.querySelectorAll(".carousel-item");
+  const prevBtn = document.getElementById("prevBtn");
+  const nextBtn = document.getElementById("nextBtn");
+  let currentIndex = 0;
+
+  function getItemsPerView() {
+    if (window.innerWidth >= 1024) return 3;
+    if (window.innerWidth >= 768) return 2;
+    return 1;
+  }
+
+  function updateCarousel() {
+    const itemsPerView = getItemsPerView();
+    const maxIndex = items.length - itemsPerView;
+    carousel.style.transform = `translateX(-${currentIndex * (100 / itemsPerView)}%)`;
+    prevBtn.style.opacity = currentIndex === 0 ? "0.5" : "1";
+    nextBtn.style.opacity = currentIndex === maxIndex ? "0.5" : "1";
+  }
+
+  prevBtn.addEventListener("click", () => {
+    if (currentIndex > 0) {
+      currentIndex--;
+      updateCarousel();
+    }
+  });
+
+  nextBtn.addEventListener("click", () => {
+    const itemsPerView = getItemsPerView();
+    const maxIndex = items.length - itemsPerView;
+    if (currentIndex < maxIndex) {
+      currentIndex++;
+      updateCarousel();
+    }
+  });
+
+  window.addEventListener("resize", updateCarousel);
+
+  // Initial update
+  updateCarousel();
+
+  // Optional: Add touch swipe functionality for mobile
+  let touchStartX = 0;
+  let touchEndX = 0;
+
+  carousel.addEventListener(
+    "touchstart",
+    (e) => {
+      touchStartX = e.changedTouches[0].screenX;
+    },
+    false
+  );
+
+  carousel.addEventListener(
+    "touchend",
+    (e) => {
+      touchEndX = e.changedTouches[0].screenX;
+      handleSwipe();
+    },
+    false
+  );
+
+  function handleSwipe() {
+    const itemsPerView = getItemsPerView();
+    const maxIndex = items.length - itemsPerView;
+    if (touchEndX < touchStartX && currentIndex < maxIndex) {
+      // Swipe left
+      currentIndex++;
+      updateCarousel();
+    }
+    if (touchEndX > touchStartX && currentIndex > 0) {
+      // Swipe right
+      currentIndex--;
+      updateCarousel();
+    }
+  }
+</script>

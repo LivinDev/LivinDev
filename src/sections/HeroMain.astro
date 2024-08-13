@@ -1,0 +1,122 @@
+---
+import { Image } from "astro:assets";
+import Italian from "../assets/italian.jpg";
+import Indian from "../assets/indiandish.jpg";
+import Veg from "../assets/vegdish.jpg";
+import Cocktail from "../assets/cocktail.jpg";
+import Dessert from "../assets/dessert.jpg";
+import Chinese from "../assets/chinese.jpg";
+import Chicken from "../assets/chicken.jpg";
+import SeaFood from "../assets/seafood.jpg";
+---
+
+<div class="outter-container">
+  <div class="inner-container">
+    <div class="sidebar">
+      <h1 class="main-title">CULLINARY CANVAS</h1>
+      <div class="divider"></div>
+      <div class="menu">
+        <div class="item">
+          <Image class="menu-img" src={Italian} alt="" />
+        </div>
+        <div class="item"><Image class="menu-img" src={Indian} alt="" /></div>
+        <div class="item"><Image class="menu-img" src={Veg} alt="" /></div>
+        <div class="item"><Image class="menu-img" src={Cocktail} alt="" /></div>
+        <div class="item"><Image class="menu-img" src={Dessert} alt="" /></div>
+        <div class="item"><Image class="menu-img" src={Chinese} alt="" /></div>
+        <div class="item"><Image class="menu-img" src={Chicken} alt="" /></div>
+        <div class="item"><Image class="menu-img" src={SeaFood} alt="" /></div>
+      </div>
+
+      <a class="btn-filled" href="">Reservation</a>
+    </div>
+  </div>
+</div>
+
+<style>
+  .outter-container {
+    background: linear-gradient(to right, #38000070, #3800004b),
+      url(/hero-img.jpg);
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+  }
+  .inner-container {
+    min-height: 100vh;
+    height: fit-content;
+  }
+  .sidebar {
+    min-height: 100vh;
+    height: 100%;
+    width: 300px;
+    background-color: rgba(0, 0, 0, 0.751);
+    padding: 1rem;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+  .divider {
+    height: 1px;
+    background-color: black;
+    margin: 1rem;
+    width: 100%;
+  }
+  .main-title {
+    font-size: 42px;
+    font-weight: 900;
+    text-align: center;
+    font-family: "Abril Fatface", serif;
+    letter-spacing: 1px;
+    line-height: 2.5rem;
+    color: var(--base-l);
+    /* background-image: url(/text-img.jpg);
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent; */
+  }
+  .menu {
+    display: grid;
+    width: 100%;
+    grid-template-columns: 1fr 1fr;
+    grid-template-rows: auto auto;
+    gap: 20px;
+    align-items: center;
+  }
+  .item {
+    height: 100px;
+    background-color: rgb(200, 200, 200);
+    position: relative;
+    border-radius: 4px;
+    overflow: hidden;
+  }
+  .menu-img {
+    height: 100%;
+    width: 100%;
+    object-fit: cover;
+    position: absolute;
+    right: 0;
+    top: 0;
+  }
+  .btn-filled {
+    display: inline-block;
+    margin-top: 1rem;
+    width: 100%;
+    background-color: var(--base-l);
+    text-align: center;
+    padding: 0.7rem 1rem;
+    color: white;
+    text-decoration: none;
+    transition: background-color 0.5s ease-in-out;
+    &:hover {
+      background-color: var(--base-d);
+    }
+  }
+
+  @media (max-width: 768px) {
+    .sidebar {
+      display: none;
+    }
+  }
+</style>
