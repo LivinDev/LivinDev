@@ -1,14 +1,15 @@
 ---
-import type { DishesName } from "@/config/data.interface";
+import type { DishesData } from "@/config/data.interface";
 import { Image } from "astro:assets";
 import Dish1 from "../assets/dishImages/cocktails.jpg";
 import Dish2 from "../assets/dishImages/food.jpg";
 import Dish3 from "../assets/dishImages/desserts.png";
 interface Props {
-  data: DishesName;
+  data: DishesData;
 }
 
 const { data } = Astro.props;
+const dataItem = data.dishItems;
 ---
 
 <div class="main-container">
@@ -16,14 +17,14 @@ const { data } = Astro.props;
     <a href="" class="left-section">
       <Image src={Dish1} alt="" />
       {/* @ts-ignore */}
-      <h1 class="heading">{data[0].dishType}</h1>
+      <h1 class="heading">{dataItem[0].dishType}</h1>
     </a>
     <div class="right-section">
       <div class="top-section">
         <a href="" class="image">
           <Image src={Dish2} alt="" />
           {/* @ts-ignore */}
-          <h1 class="heading">{data[1].dishType}</h1>
+          <h1 class="heading">{dataItem[1].dishType}</h1>
         </a>
         <div class="text">
           <h1>Culinary Canvas</h1>
@@ -37,12 +38,11 @@ const { data } = Astro.props;
       <a href="" class="bottom-section">
         <Image src={Dish3} alt="" />
         {/* @ts-ignore */}
-        <h1 class="heading">{data[2].dishType}</h1>
+        <h1 class="heading">{dataItem[2].dishType}</h1>
       </a>
     </div>
   </div>
 </div>
-
 <style>
   .main-container {
     /* background-color: var(--base-l-10); */
@@ -50,7 +50,7 @@ const { data } = Astro.props;
   }
 
   .inner-container {
-    max-width: 1300px;
+    max-width: 1330px;
     margin: 0 auto;
     height: 100vh;
     display: flex;

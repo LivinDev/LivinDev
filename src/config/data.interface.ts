@@ -1,6 +1,7 @@
 export interface ProjectData {
   meta: Meta;
-  dishes: DishesName;
+  dishesData: DishesData;
+  footerData:FooterData;
  
 }
 
@@ -34,6 +35,17 @@ export interface Dish {
   dishType: string;
 }
 
-export interface DishesName {
-  dishes: Dish[];
+export interface DishesData {
+  dishItems: Dish[];
+}
+
+
+export interface FooterLink {
+  label: string;
+  href: string;
+}
+
+export interface FooterData {
+  copyright: string;
+  links: FooterLink[];
 }

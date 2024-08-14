@@ -1,0 +1,71 @@
+---
+import type { FooterData } from "@/config/data.interface";
+
+interface Props {
+  data: FooterData;
+}
+
+const { data } = Astro.props;
+---
+
+<div class="outer-container">
+  <footer class="inner-container">
+    <div class="copyright">
+      {data.copyright}
+    </div>
+    <div class="links">
+      {data.links.map((link) => <a href={link.href}>{link.label}</a>)}
+    </div>
+  </footer>
+</div>
+
+<style>
+  .outer-container {
+    background-color: #1a1a1a;
+    padding: 1rem 0;
+  }
+  .inner-container {
+    color: #ffffff;
+    padding: 1rem;
+    font-family: Arial, sans-serif;
+    display: flex;
+    justify-content: space-between;
+    max-width: 1330px;
+    margin: 0 auto;
+    gap: 2rem;
+    width: 100%;
+    align-items: center;
+  }
+
+  .copyright {
+    font-size: 14px;
+    margin-bottom: 10px;
+  }
+
+  .links {
+    display: flex;
+    flex-wrap: wrap;
+    max-width: 500px;
+    align-self: flex-end;
+    justify-content: flex-end;
+  }
+
+  .links a {
+    color: #ffffff;
+    text-decoration: none;
+    font-size: 14px;
+    margin: 0 0.5rem;
+    line-height: 2;
+  }
+
+  .links a:hover {
+    text-decoration: underline;
+  }
+
+  @media (max-width: 850px) {
+    .inner-container {
+      flex-direction: column-reverse;
+      max-width: 100%;
+    }
+  }
+</style>

@@ -5,12 +5,14 @@ import { getLandingData } from "@/services/data.service";
 import PopularDish from "@/sections/PopularDish.astro";
 import TitleBar from "@/sections/TitleBar.astro";
 import Testimonial from "@/sections/Testimonial.astro";
+import Aboutus from "@/sections/Aboutus.astro";
 const data = await getLandingData();
 ---
 
 <Layout title="Culinary Canvas" meta={data.meta}>
   <HeroMain />
   <TitleBar />
-  <PopularDish data={data.dishes} />
+  <Aboutus />
+  <PopularDish data={data.dishesData} />
   <Testimonial />
 </Layout>

@@ -1,6 +1,7 @@
 ---
 import "../styles/global.scss";
 import type { Meta } from "@/config/data.interface";
+import Footer from "@/sections/Footer.astro";
 
 interface Props {
   title: string;
@@ -8,6 +9,7 @@ interface Props {
 }
 import { getLandingData } from "@/services/data.service";
 const data = await getLandingData();
+
 const { title, meta } = Astro.props;
 const ldJson = JSON.stringify(meta?.ldJson);
 ---
@@ -27,6 +29,8 @@ const ldJson = JSON.stringify(meta?.ldJson);
   </head>
   <body>
     <slot />
+
+    <Footer data={data.footerData} />
   </body>
 </html>
 <!-- <script
