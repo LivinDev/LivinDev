@@ -1,0 +1,408 @@
+---
+import Layout from "@/layouts/Layout.astro";
+import Navbar from "@/sections/Navbar.astro";
+
+const menuData = [
+  {
+    name: "Veg Pizza",
+    category: ["Veg", "Pizza"],
+    price: 10,
+    image: "https://placehold.co/400",
+  },
+  {
+    name: "Chicken Pizza",
+    category: ["Non-Veg", "Pizza", "Chicken"],
+    price: 12,
+    image: "https://placehold.co/400",
+  },
+  {
+    name: "Veg Burger",
+    category: ["Veg", "Burger"],
+    price: 8,
+    image: "https://placehold.co/400",
+  },
+  {
+    name: "Chicken Burger",
+    category: ["Non-Veg", "Burger", "Chicken"],
+    price: 11,
+    image: "https://placehold.co/400",
+  },
+  {
+    name: "Cheese Pizza",
+    category: ["Veg", "Pizza"],
+    price: 11,
+    image: "https://placehold.co/400",
+  },
+  {
+    name: "Pepperoni Pizza",
+    category: ["Non-Veg", "Pizza"],
+    price: 13,
+    image: "https://placehold.co/400",
+  },
+  {
+    name: "Mushroom Burger",
+    category: ["Veg", "Burger"],
+    price: 9,
+    image: "https://placehold.co/400",
+  },
+  {
+    name: "Bacon Burger",
+    category: ["Non-Veg", "Burger"],
+    price: 12,
+    image: "https://placehold.co/400",
+  },
+  {
+    name: "Veggie Pizza",
+    category: ["Veg", "Pizza"],
+    price: 10,
+    image: "https://placehold.co/400",
+  },
+  {
+    name: "BBQ Chicken Pizza",
+    category: ["Non-Veg", "Pizza", "Chicken"],
+    price: 14,
+    image: "https://placehold.co/400",
+  },
+  {
+    name: "Tofu Burger",
+    category: ["Veg", "Burger"],
+    price: 8,
+    image: "https://placehold.co/400",
+  },
+  {
+    name: "Steak Burger",
+    category: ["Non-Veg", "Burger"],
+    price: 15,
+    image: "https://placehold.co/400",
+  },
+  {
+    name: "Margherita Pizza",
+    category: ["Veg", "Pizza"],
+    price: 9,
+    image: "https://placehold.co/400",
+  },
+  {
+    name: "Hawaiian Pizza",
+    category: ["Non-Veg", "Pizza"],
+    price: 13,
+    image: "https://placehold.co/400",
+  },
+  {
+    name: "Avocado Burger",
+    category: ["Veg", "Burger"],
+    price: 10,
+    image: "https://placehold.co/400",
+  },
+  {
+    name: "Fish Burger",
+    category: ["Non-Veg", "Burger"],
+    price: 14,
+    image: "https://placehold.co/400",
+  },
+  {
+    name: "Four Cheese Pizza",
+    category: ["Veg", "Pizza"],
+    price: 12,
+    image: "https://placehold.co/400",
+  },
+  {
+    name: "Meat Lovers Pizza",
+    category: ["Non-Veg", "Pizza"],
+    price: 15,
+    image: "https://placehold.co/400",
+  },
+  {
+    name: "Portobello Burger",
+    category: ["Veg", "Burger"],
+    price: 9,
+    image: "https://placehold.co/400",
+  },
+  {
+    name: "Turkey Burger",
+    category: ["Non-Veg", "Burger"],
+    price: 13,
+    image: "https://placehold.co/400",
+  },
+  {
+    name: "Spinach and Feta Pizza",
+    category: ["Veg", "Pizza"],
+    price: 11,
+    image: "https://placehold.co/400",
+  },
+  {
+    name: "Buffalo Chicken Pizza",
+    category: ["Non-Veg", "Pizza", "Chicken"],
+    price: 14,
+    image: "https://placehold.co/400",
+  },
+  {
+    name: "Quinoa Burger",
+    category: ["Veg", "Burger"],
+    price: 10,
+    image: "https://placehold.co/400",
+  },
+  {
+    name: "Crab Cake Burger",
+    category: ["Non-Veg", "Burger"],
+    price: 16,
+    image: "https://placehold.co/400",
+  },
+];
+
+const filters = ["All", "Veg", "Non-Veg", "Chicken", "Pizza", "Burger"];
+let selectedFilter = "All";
+
+const filteredMenu = menuData.filter((item) => {
+  if (selectedFilter === "All") return true;
+  return item.category.includes(selectedFilter);
+});
+---
+
+<Layout title="Culinary Canvas Menu">
+  <Navbar />
+  <div class="hero">
+    <div class="container-mu">
+      <h1>The Culinary Canvas</h1>
+      <div class="rating-mu">★★★★☆ 4.5 <span>(15k+ Reviews)</span></div>
+    </div>
+  </div>
+  <div class="container-mu main-content">
+    <div class="restaurant-info-mu">
+      <p>
+        <i class="fas fa-map-marker-alt"></i> 6 Yukon Drive Bedford, NC 28376
+      </p>
+      <p><i class="far fa-clock"></i> Hours: 5:00 PM - 11:00 PM</p>
+    </div>
+
+    <div class="filters-mu">
+      {
+        filters.map((filter) => (
+          <button
+            class={`filter-btn-mu ${filter === selectedFilter ? "active" : ""}`}
+            data-filter={filter}
+          >
+            {filter}
+          </button>
+        ))
+      }
+    </div>
+
+    <div class="menu-mu" id="menu">
+      {
+        filteredMenu.map((item) => (
+          <div class="category-mu">
+            <img src={item.image} alt={item.name} />
+            <div class="category-overlay-mu">
+              <div class="category-name-mu">{item.name}</div>
+              <div class="category-price-mu">${item.price}</div>
+            </div>
+          </div>
+        ))
+      }
+    </div>
+  </div>
+</Layout>
+
+<style is:global>
+  @import url("https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700&family=Lato:wght@300;400;700&display=swap");
+  @import url("https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css");
+
+  :root {
+    --primary-color: #d4af37;
+    --secondary-color: #2c3e50;
+    --background-color: #f8f9fa;
+    --text-color: #333333;
+    --overlay-color: rgba(0, 0, 0, 0.7);
+  }
+
+  .container-mu {
+    max-width: 1330px;
+    margin: 0 auto;
+    padding: 1rem;
+  }
+
+  .hero {
+    background:
+      linear-gradient(rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.7)),
+      url("https://source.unsplash.com/1600x900/?restaurant,food") no-repeat
+        center center/cover;
+    color: #fff;
+    padding: 4rem 0;
+    text-align: center;
+  }
+
+  h1 {
+    font-family: "Playfair Display", serif;
+    font-size: 3rem;
+    margin-bottom: 0.5rem;
+  }
+
+  .rating-mu {
+    font-size: 1.2rem;
+    color: var(--primary-color);
+  }
+
+  .rating-mu span {
+    color: #fff;
+    font-size: 0.9rem;
+  }
+
+  .main-content {
+    padding: 2rem 0;
+  }
+
+  .restaurant-info-mu {
+    text-align: center;
+    margin-bottom: 2rem;
+  }
+
+  .restaurant-info-mu p {
+    margin: 0.5rem 0;
+  }
+
+  .restaurant-info-mu i {
+    color: var(--primary-color);
+    margin-right: 0.5rem;
+  }
+
+  .filters-mu {
+    display: flex;
+    justify-content: center;
+    gap: 1rem;
+    margin-bottom: 2rem;
+    flex-wrap: wrap;
+  }
+
+  .filter-btn-mu {
+    padding: 0.5rem 1rem;
+    border: 2px solid var(--primary-color);
+    border-radius: 30px;
+    background: transparent;
+    color: var(--secondary-color);
+    font-weight: bold;
+    transition: all 0.3s ease;
+    cursor: pointer;
+  }
+
+  .filter-btn-mu:hover,
+  .filter-btn-mu.active {
+    background-color: var(--primary-color);
+    color: #fff;
+  }
+
+  .menu-mu {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+    gap: 2rem;
+  }
+
+  .category-mu {
+    position: relative;
+    border-radius: 10px;
+    overflow: hidden;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+    transition:
+      transform 0.3s ease,
+      box-shadow 0.3s ease;
+  }
+
+  .category-mu:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 6px 15px rgba(0, 0, 0, 0.15);
+  }
+
+  .category-mu img {
+    width: 100%;
+    height: 250px;
+    object-fit: cover;
+    transition: transform 0.3s ease;
+  }
+
+  .category-mu:hover img {
+    transform: scale(1.05);
+  }
+
+  .category-overlay-mu {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    background: var(--overlay-color);
+    color: #fff;
+    padding: 1rem;
+    transform: translateY(100%);
+    transition: transform 0.3s ease;
+  }
+
+  .category-mu:hover .category-overlay-mu {
+    transform: translateY(0);
+  }
+
+  .category-name-mu {
+    font-weight: bold;
+    font-size: 1.1rem;
+    margin-bottom: 0.5rem;
+  }
+
+  .category-price-mu {
+    font-size: 1rem;
+    color: var(--primary-color);
+  }
+
+  @media (max-width: 768px) {
+    .menu-mu {
+      grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+    }
+  }
+</style>
+
+<script define:vars={{ menuData }}>
+  // Embed menuData into a global variable
+  window.menuData = menuData;
+</script>
+
+<script is:inline>
+  document.querySelectorAll(".filter-btn-mu").forEach((button) => {
+    button.addEventListener("click", () => {
+      const filter = button.getAttribute("data-filter");
+      document
+        .querySelectorAll(".filter-btn-mu")
+        .forEach((btn) => btn.classList.remove("active"));
+      button.classList.add("active");
+
+      const filteredMenu = window.menuData.filter((item) => {
+        if (filter === "All") return true;
+        return item.category.includes(filter);
+      });
+
+      const menuContainer = document.getElementById("menu");
+      menuContainer.innerHTML = "";
+
+      filteredMenu.forEach((item) => {
+        const categoryDiv = document.createElement("div");
+        categoryDiv.className = "category-mu";
+
+        const img = document.createElement("img");
+        img.src = item.image;
+        img.alt = item.name;
+
+        const overlay = document.createElement("div");
+        overlay.className = "category-overlay-mu";
+
+        const nameDiv = document.createElement("div");
+        nameDiv.className = "category-name-mu";
+        nameDiv.textContent = item.name;
+
+        const priceDiv = document.createElement("div");
+        priceDiv.className = "category-price-mu";
+        priceDiv.textContent = `$${item.price}`;
+
+        overlay.appendChild(nameDiv);
+        overlay.appendChild(priceDiv);
+        categoryDiv.appendChild(img);
+        categoryDiv.appendChild(overlay);
+        menuContainer.appendChild(categoryDiv);
+      });
+    });
+  });
+</script>
